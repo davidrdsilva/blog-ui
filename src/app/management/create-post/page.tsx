@@ -1,30 +1,24 @@
 "use client";
 
-import { Link, RichTextEditor } from "@mantine/tiptap";
-import { useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-
 import {
   Badge,
   FileInput,
   Switch,
   TagsInput,
   Textarea,
-  TextInput
+  TextInput,
 } from "@mantine/core";
+import { Link, RichTextEditor } from "@mantine/tiptap";
+import { useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import { useState } from "react";
+
+// Import styles
 import "@mantine/tiptap/styles.css";
-import { CSSProperties, useState } from "react";
+import classes from "./page.module.css";
 
 const initialContent =
   '<h2 style="text-align: center;">Welcome to Mantine rich text editor</h2><p><code>RichTextEditor</code> component focuses on usability and is designed to be as simple as possible to bring a familiar editing experience to regular users. <code>RichTextEditor</code> is based on <a href="https://tiptap.dev/" rel="noopener noreferrer" target="_blank">Tiptap.dev</a> and supports all of its features:</p><ul><li>General text formatting: <strong>bold</strong>, <em>italic</em>, <u>underline</u>, <s>strike-through</s> </li><li>Headings (h1-h6)</li><li>Sub and super scripts (<sup>&lt;sup /&gt;</sup> and <sub>&lt;sub /&gt;</sub> tags)</li><li>Ordered and bullet lists</li><li>Text align&nbsp;</li><li>And all <a href="https://tiptap.dev/extensions" target="_blank" rel="noopener noreferrer">other extensions</a></li></ul>';
-
-const containerStyle: CSSProperties = {
-  margin: "auto",
-  marginTop: 20,
-  maxWidth: "50%",
-  padding: 10,
-  borderRadius: 10,
-};
 
 export default function TextEditor() {
   // State to store the editor's content
@@ -41,7 +35,7 @@ export default function TextEditor() {
   });
 
   return (
-    <div style={containerStyle}>
+    <div className={classes.container}>
       <TextInput label="Post title" radius="md" />
 
       <Textarea
