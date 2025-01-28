@@ -16,39 +16,40 @@ import { useState } from "react";
 // Import styles
 import "@mantine/tiptap/styles.css";
 import classes from "./modules/page.module.css";
+import TiptapRenderer from "@/shared/components/content-renderer";
 
 const initialContent: JSONContent = {
-  type: 'doc',
+  type: "doc",
   content: [
     {
-      type: 'heading',
+      type: "heading",
       attrs: { level: 2 },
-      content: [{ type: 'text', text: 'Welcome to Mantine rich text editor' }],
+      content: [{ type: "text", text: "Welcome to Mantine rich text editor" }],
     },
     {
-      type: 'paragraph',
+      type: "paragraph",
       content: [
         {
-          type: 'text',
-          text: 'RichTextEditor component focuses on usability and is designed to be as simple as possible to bring a familiar editing experience to regular users. ',
+          type: "text",
+          text: "RichTextEditor component focuses on usability and is designed to be as simple as possible to bring a familiar editing experience to regular users. ",
         },
-        { type: 'text', marks: [{ type: 'code' }], text: 'RichTextEditor' },
-        { type: 'text', text: ' is based on ' },
+        { type: "text", marks: [{ type: "code" }], text: "RichTextEditor" },
+        { type: "text", text: " is based on " },
         {
-          type: 'text',
+          type: "text",
           marks: [
             {
-              type: 'link',
+              type: "link",
               attrs: {
-                href: 'https://tiptap.dev/',
-                target: '_blank',
-                rel: 'noopener noreferrer',
+                href: "https://tiptap.dev/",
+                target: "_blank",
+                rel: "noopener noreferrer",
               },
             },
           ],
-          text: 'Tiptap.dev',
+          text: "Tiptap.dev",
         },
-        { type: 'text', text: ' and supports all of its features:' },
+        { type: "text", text: " and supports all of its features:" },
       ],
     },
   ],
@@ -147,6 +148,11 @@ export default function TextEditor() {
 
       {/* Display the current JSON content of the editor */}
       <div style={{ marginTop: 20 }}>
+        <Badge color="orange" variant="light">
+          Parded content
+        </Badge>
+        <TiptapRenderer content={editorContent} />
+
         <Badge color="orange" variant="light">
           Preview JSON Content
         </Badge>
