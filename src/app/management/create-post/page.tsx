@@ -2,6 +2,7 @@
 
 import {
   Badge,
+  Button,
   FileInput,
   Switch,
   TagsInput,
@@ -17,6 +18,7 @@ import { useState } from "react";
 import "@mantine/tiptap/styles.css";
 import classes from "./modules/page.module.css";
 import TiptapRenderer from "@/shared/components/content-renderer";
+import { postMock } from "../../../../mocks/mock-data";
 
 const initialContent: JSONContent = {
   type: "doc",
@@ -55,9 +57,47 @@ const initialContent: JSONContent = {
   ],
 };
 
+type Author = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  image: string;
+};
+
+type Post = {
+  id: string;
+  createdAt: string;
+  image: string;
+  author: Author;
+  title: string;
+  body: string;
+  tags: string[];
+};
+
 export default function TextEditor() {
-  // State to store the editor's content in JSON format
+  // State for all form fields
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState<string[]>([]);
+  const [image, setImage] = useState<File | null>(null);
+  const [isDraft, setIsDraft] = useState(false);
   const [editorContent, setEditorContent] = useState(initialContent);
+
+  const savePost = () => {
+    // Create a new Post object with current values
+    const newPost: Post = {
+      id: crypto.randomUUID(), // Generate a random ID
+      createdAt: new Date().toISOString(),
+      image: image ? URL.createObjectURL(image) : "", // Create URL for uploaded image
+      author: postMock.author, // Using mock author data
+      title: title,
+      body: JSON.stringify(editorContent),
+      tags: tags,
+    };
+
+    // Here you can handle the post data (e.g., send to API)
+    console.log("Saving post:", newPost);
+  };
 
   const editor = useEditor({
     extensions: [StarterKit, Link],
@@ -71,7 +111,12 @@ export default function TextEditor() {
 
   return (
     <div className={classes.container}>
-      <TextInput label="Post title" radius="md" />
+      <TextInput 
+        label="Post title" 
+        radius="md"
+        value={title}
+        onChange={(event) => setTitle(event.currentTarget.value)}
+      />
 
       <Textarea
         radius="md"
@@ -82,24 +127,32 @@ export default function TextEditor() {
         minRows={2}
         maxRows={6}
         style={{ marginTop: 20 }}
+        value={description}
+        onChange={(event) => setDescription(event.currentTarget.value)}
       />
 
       <TagsInput
         label="Tags"
         placeholder="Write a tag and press enter"
         style={{ marginTop: 20 }}
+        value={tags}
+        onChange={setTags}
       />
 
       <FileInput
         label="Post image"
         placeholder="Select the image of the post"
         style={{ marginTop: 20 }}
+        value={image}
+        onChange={setImage}
       />
 
       <Switch
         label="Mark as draft"
         description="If enabled, the post will be saved as a draft"
         style={{ marginTop: 20 }}
+        checked={isDraft}
+        onChange={(event) => setIsDraft(event.currentTarget.checked)}
       />
 
       <RichTextEditor
@@ -146,27 +199,16 @@ export default function TextEditor() {
         <RichTextEditor.Content />
       </RichTextEditor>
 
+      <Button variant="light" onClick={savePost} style={{ marginTop: 20 }}>
+        Save
+      </Button>
+
       {/* Display the current JSON content of the editor */}
       <div style={{ marginTop: 20 }}>
         <Badge color="orange" variant="light">
           Parded content
         </Badge>
         <TiptapRenderer content={editorContent} />
-
-        <Badge color="orange" variant="light">
-          Preview JSON Content
-        </Badge>
-        <pre
-          style={{
-            background: "black",
-            padding: "10px",
-            borderRadius: "8px",
-            marginTop: "10px",
-            overflowX: "scroll",
-          }}
-        >
-          {JSON.stringify(editorContent, null, 2)}
-        </pre>
       </div>
     </div>
   );

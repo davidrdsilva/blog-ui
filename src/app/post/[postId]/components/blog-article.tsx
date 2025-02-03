@@ -7,14 +7,10 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { Anton, Lora } from "next/font/google";
+import { Anton } from "next/font/google";
 
 import classes from "../modules/blog-article.module.css";
-
-const articleFont = Lora({
-  weight: "400",
-  subsets: ["latin"],
-});
+import TiptapRenderer from "@/shared/components/content-renderer";
 
 const titleFont = Anton({
   weight: "400",
@@ -76,14 +72,9 @@ export default function BlogArticle({
         </Group>
 
         <Divider my="lg" />
-        <div
-          style={{
-            lineHeight: "1.5",
-            fontSize: "1.125rem",
-          }}
-          className={articleFont.className}
-          dangerouslySetInnerHTML={{ __html: body }}
-        />
+        
+        {/* Display the current JSON content of the editor */}
+        <TiptapRenderer content={JSON.parse(body)} />
       </Container>
     </>
   );
