@@ -4,21 +4,28 @@ import {
   Badge,
   Button,
   FileInput,
+  Notification,
   Switch,
   TagsInput,
   Textarea,
-  TextInput,
+  TextInput
 } from "@mantine/core";
 import { Link, RichTextEditor } from "@mantine/tiptap";
+import { IconCheck, IconX } from '@tabler/icons-react';
 import { JSONContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useState } from "react";
 
 // Import styles
+import TiptapRenderer from "@/shared/components/content-renderer";
 import "@mantine/tiptap/styles.css";
 import classes from "./modules/page.module.css";
-import TiptapRenderer from "@/shared/components/content-renderer";
+
+// Mock
 import { postMock } from "../../../../mocks/mock-data";
+
+const xIcon = <IconX size={20} />;
+const checkIcon = <IconCheck size={20} />;
 
 const initialContent: JSONContent = {
   type: "doc",
@@ -82,8 +89,11 @@ export default function TextEditor() {
   const [image, setImage] = useState<File | null>(null);
   const [isDraft, setIsDraft] = useState(false);
   const [editorContent, setEditorContent] = useState(initialContent);
+  const [loading, setLoading] = useState(false); 
 
   const savePost = () => {
+    setLoading(true);
+
     // Create a new Post object with current values
     const newPost: Post = {
       id: crypto.randomUUID(), // Generate a random ID
@@ -97,6 +107,8 @@ export default function TextEditor() {
 
     // Here you can handle the post data (e.g., send to API)
     console.log("Saving post:", newPost);
+
+    setLoading(false);
   };
 
   const editor = useEditor({
@@ -199,14 +211,22 @@ export default function TextEditor() {
         <RichTextEditor.Content />
       </RichTextEditor>
 
-      <Button variant="light" onClick={savePost} style={{ marginTop: 20 }}>
+      <Button variant="light" size="md" onClick={savePost} mt={20} loading={loading}>
         Save
       </Button>
+
+      <Notification icon={xIcon} mt="md" color="red" title="Bummer!" withCloseButton={false}>
+        Something went wrong
+      </Notification>
+
+      <Notification icon={checkIcon} color="teal" title="All good!" mt="md" withCloseButton={false}>
+        Everything is fine
+      </Notification>
 
       {/* Display the current JSON content of the editor */}
       <div style={{ marginTop: 20 }}>
         <Badge color="orange" variant="light">
-          Parded content
+          preview
         </Badge>
         <TiptapRenderer content={editorContent} />
       </div>
