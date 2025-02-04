@@ -1,6 +1,8 @@
 import {
   Avatar,
+  Badge,
   Container,
+  DefaultMantineColor,
   Divider,
   Group,
   Image,
@@ -30,26 +32,54 @@ type Post = {
   image: string;
   author: Author;
   title: string;
+  description: string;
   body: string;
   tags: string[];
 };
 
 export default function BlogArticle({
   title,
+  description,
   image,
   createdAt,
   body,
   author,
+  tags,
 }: Post) {
   const publishingDate = "Published on " + new Date(createdAt).toDateString();
+
+  const getRandomColor = () => {
+    const colors: DefaultMantineColor[] = [
+      "red",
+      "blue",
+      "green",
+      "orange",
+      "pink",
+      "cyan",
+      "lime",
+      "grape",
+      "violet",
+      "yellow",
+    ];
+    return colors[Math.floor(Math.random() * colors.length)];
+  };
 
   return (
     <>
       <div style={{ position: "relative", overflow: "hidden" }}>
         <Image src={image} alt={title} className={classes.image} />
-        <Title className={`${classes.title} ${titleFont.className}`}>
-          {title}
-        </Title>
+        <div className={classes.header}>
+          <Title
+            className={`${classes.title} ${titleFont.className}`}
+            c={"gray"}
+          >
+            {title}
+          </Title>
+          <Divider my="lg" />
+          <Text className={classes.description} c={"dimmed"}>
+            {description}
+          </Text>
+        </div>
       </div>
 
       <Container size="md" my="xl">
@@ -72,9 +102,19 @@ export default function BlogArticle({
         </Group>
 
         <Divider my="lg" />
-        
+
         {/* Display the current JSON content of the editor */}
         <TiptapRenderer content={JSON.parse(body)} />
+
+        <Divider my="lg" />
+        <Group>
+          {tags.map((tag) => (
+            <Badge key={tag} color={getRandomColor()} variant="light">
+              {tag}
+            </Badge>
+          ))}
+          <Divider my="lg" />
+        </Group>
       </Container>
     </>
   );

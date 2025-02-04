@@ -8,10 +8,10 @@ import {
   Switch,
   TagsInput,
   Textarea,
-  TextInput
+  TextInput,
 } from "@mantine/core";
 import { Link, RichTextEditor } from "@mantine/tiptap";
-import { IconCheck, IconX } from '@tabler/icons-react';
+import { IconCheck, IconX } from "@tabler/icons-react";
 import { JSONContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useState } from "react";
@@ -89,7 +89,7 @@ export default function TextEditor() {
   const [image, setImage] = useState<File | null>(null);
   const [isDraft, setIsDraft] = useState(false);
   const [editorContent, setEditorContent] = useState(initialContent);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const savePost = () => {
     setLoading(true);
@@ -123,14 +123,16 @@ export default function TextEditor() {
 
   return (
     <div className={classes.container}>
-      <TextInput 
-        label="Post title" 
+      <TextInput
+        name="post-title"
+        label="Post title"
         radius="md"
         value={title}
         onChange={(event) => setTitle(event.currentTarget.value)}
       />
 
       <Textarea
+        name="description"
         radius="md"
         label="Description"
         description="Short description of the post"
@@ -144,6 +146,7 @@ export default function TextEditor() {
       />
 
       <TagsInput
+        name="tags"
         label="Tags"
         placeholder="Write a tag and press enter"
         style={{ marginTop: 20 }}
@@ -152,6 +155,7 @@ export default function TextEditor() {
       />
 
       <FileInput
+        name="image"
         label="Post image"
         placeholder="Select the image of the post"
         style={{ marginTop: 20 }}
@@ -160,6 +164,7 @@ export default function TextEditor() {
       />
 
       <Switch
+        name="draft-status"
         label="Mark as draft"
         description="If enabled, the post will be saved as a draft"
         style={{ marginTop: 20 }}
@@ -168,6 +173,7 @@ export default function TextEditor() {
       />
 
       <RichTextEditor
+        id="text-editor"
         editor={editor}
         style={{
           borderRadius: 10,
@@ -211,15 +217,33 @@ export default function TextEditor() {
         <RichTextEditor.Content />
       </RichTextEditor>
 
-      <Button variant="light" size="md" onClick={savePost} mt={20} loading={loading}>
+      <Button
+        variant="light"
+        size="md"
+        onClick={savePost}
+        mt={20}
+        loading={loading}
+      >
         Save
       </Button>
 
-      <Notification icon={xIcon} mt="md" color="red" title="Bummer!" withCloseButton={false}>
+      <Notification
+        icon={xIcon}
+        mt="md"
+        color="red"
+        title="Bummer!"
+        withCloseButton={false}
+      >
         Something went wrong
       </Notification>
 
-      <Notification icon={checkIcon} color="teal" title="All good!" mt="md" withCloseButton={false}>
+      <Notification
+        icon={checkIcon}
+        color="teal"
+        title="All good!"
+        mt="md"
+        withCloseButton={false}
+      >
         Everything is fine
       </Notification>
 

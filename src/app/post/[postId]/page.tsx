@@ -8,6 +8,7 @@ export default function BlogPage() {
     <BlogArticle
       id={postMock.id}
       title={postMock.title}
+      description={postMock.description}
       image={postMock.image}
       createdAt={postMock.createdAt}
       body={postMock.body}
