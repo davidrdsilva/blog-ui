@@ -48,7 +48,7 @@ export default function BlogArticle({
 }: Post) {
   const publishingDate = "Published on " + new Date(createdAt).toDateString();
 
-  const getRandomColor = () => {
+  const getRandomColor = (tag: string) => {
     const colors: DefaultMantineColor[] = [
       "red",
       "blue",
@@ -61,7 +61,20 @@ export default function BlogArticle({
       "violet",
       "yellow",
     ];
-    return colors[Math.floor(Math.random() * colors.length)];
+    
+    // Use a simple hash function to consistently map a tag to a color
+    const hashCode = (str: string) => {
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // Convert to 32-bit integer
+      }
+      return Math.abs(hash);
+    };
+  
+    const colorIndex = hashCode(tag) % colors.length;
+    return colors[colorIndex];
   };
 
   return (
@@ -109,7 +122,7 @@ export default function BlogArticle({
         <Divider my="lg" />
         <Group>
           {tags.map((tag) => (
-            <Badge key={tag} color={getRandomColor()} variant="light">
+            <Badge key={tag} color={getRandomColor(tag)} variant="light">
               {tag}
             </Badge>
           ))}
