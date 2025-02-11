@@ -17,9 +17,9 @@ import StarterKit from "@tiptap/starter-kit";
 import { useState } from "react";
 
 // Import styles
-import TiptapRenderer from "@/shared/components/content-renderer";
+import TiptapRenderer from "@shared/components/content-renderer";
 import "@mantine/tiptap/styles.css";
-import classes from "./modules/page.module.css";
+import classes from "@styles/create-post/styles.module.css";
 
 // Mock
 import { postMock } from "../../../../mocks/mock-data";

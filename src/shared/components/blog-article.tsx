@@ -1,4 +1,4 @@
-import { Post } from "@/shared/types/post.type";
+import { Post } from "@shared/types/post.type";
 import {
   Avatar,
   Badge,
@@ -13,7 +13,7 @@ import {
 import { Anton } from "next/font/google";
 
 import TiptapRenderer from "@/shared/components/content-renderer";
-import classes from "../modules/blog-article.module.css";
+import classes from "@styles/article/styles.module.css";
 
 const titleFont = Anton({
   weight: "400",

@@ -1,6 +1,6 @@
 "use client";
 
-import BlogArticle from "@/app/post/[postId]/components/blog-article";
+import BlogArticle from "@shared/components/blog-article";
 import { postMock } from "../../../../mocks/mock-data";
 
 export default function BlogPage() {
