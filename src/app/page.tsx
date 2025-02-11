@@ -1,29 +1,12 @@
 "use client";
 
-import { ArticleCardFooter } from "@/shared/components/article-card";
+import { ArticleCard } from "@/shared/components/article-card";
+import { Post } from "@/shared/types";
 import { Container, Group, Text } from "@mantine/core";
 
 import classes from "@/shared/modules/homepage.module.css";
 import { useEffect, useState } from "react";
 import { postsMock } from "../../mocks/mock-data";
-
-type Author = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  image: string;
-};
-
-type Post = {
-  id: string;
-  createdAt: string;
-  image: string;
-  author: Author;
-  title: string;
-  description: string;
-  body?: string;
-  tags: string[];
-};
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -35,7 +18,7 @@ export default function Home() {
 
   useEffect(() => {
     getPosts();
-  }, [getPosts])
+  }, [])
 
   return (
     <>
@@ -63,7 +46,7 @@ export default function Home() {
       <Container size="lg" mb="xl">
         <Group justify="center" gap="xs">
           {posts.length && posts.map(post => (
-            <ArticleCardFooter key={post.id} post={post} />
+            <ArticleCard key={post.id} post={post} />
           ))}
         </Group>
       </Container>

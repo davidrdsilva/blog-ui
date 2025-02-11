@@ -12,26 +12,9 @@ import {
 import { IconHeart } from "@tabler/icons-react";
 
 import classes from "../modules/article-card.module.css";
+import { Post } from "@/shared/types";
 
-type Author = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  image: string;
-};
-
-type Post = {
-  id: string;
-  createdAt: string;
-  image: string;
-  author: Author;
-  title: string;
-  description: string;
-  body?: string;
-  tags: string[];
-};
-
-export function ArticleCardFooter({ post }: { post: Post }) {
+export function ArticleCard({ post }: { post: Post }) {
   const theme = useMantineTheme();
 
   return (
