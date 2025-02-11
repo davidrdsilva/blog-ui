@@ -10,21 +10,38 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { IconHeart } from "@tabler/icons-react";
-import { postMock } from "../../../mocks/mock-data";
 
 import classes from "../modules/article-card.module.css";
 
-export function ArticleCardFooter() {
+type Author = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  image: string;
+};
+
+type Post = {
+  id: string;
+  createdAt: string;
+  image: string;
+  author: Author;
+  title: string;
+  description: string;
+  body?: string;
+  tags: string[];
+};
+
+export function ArticleCardFooter({ post }: { post: Post }) {
   const theme = useMantineTheme();
 
   return (
     <Card withBorder padding="lg" radius="md" className={classes.card}>
       <Card.Section mb="sm">
-        <Image src={postMock.image} alt={postMock.title} height={180} />
+        <Image src={post.image} alt={post.title} height={180} />
       </Card.Section>
 
       <Group className={classes.tagsGroup}>
-        {postMock.tags.map((tag) => (
+        {post.tags.map((tag) => (
           <Badge
             key={tag}
             w="fit-content"
@@ -36,28 +53,28 @@ export function ArticleCardFooter() {
         ))}
       </Group>
 
-      <Anchor href={`/post/${postMock.id}`}>
+      <Anchor href={`/post/${post.id}`}>
         <Text
           className={classes.title}
           mt="xs"
           variant="gradient"
           gradient={{ from: "pink", to: "purple", deg: 90 }}
         >
-          {postMock.title}
+          {post.title}
         </Text>
       </Anchor>
-      
+
       <Card.Section className={classes.description}>
         <Text fz="xs" c="dimmed">
-          {postMock.description}
+          {post.description}
         </Text>
       </Card.Section>
 
       <Group mt="md">
-        <Avatar src={postMock.author.image} radius="sm" />
+        <Avatar src={post.author.image} radius="sm" />
         <div>
           <Text fw={500}>
-            {postMock.author.firstName} {postMock.author.lastName}
+            {post.author.firstName} {post.author.lastName}
           </Text>
           <Text fz="xs" c="dimmed">
             posted 34 minutes ago
