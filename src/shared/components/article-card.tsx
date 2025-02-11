@@ -11,8 +11,8 @@ import {
 } from "@mantine/core";
 import { IconHeart } from "@tabler/icons-react";
 
-import classes from "../modules/article-card.module.css";
-import { Post } from "@/shared/types";
+import classes from "@/shared/modules/article-card.module.css";
+import { Post } from "@/shared/types/post.type";
 
 export function ArticleCard({ post }: { post: Post }) {
   const theme = useMantineTheme();

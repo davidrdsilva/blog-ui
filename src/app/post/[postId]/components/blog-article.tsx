@@ -1,3 +1,4 @@
+import { Post } from "@/shared/types/post.type";
 import {
   Avatar,
   Badge,
@@ -11,31 +12,13 @@ import {
 } from "@mantine/core";
 import { Anton } from "next/font/google";
 
-import classes from "../modules/blog-article.module.css";
 import TiptapRenderer from "@/shared/components/content-renderer";
+import classes from "../modules/blog-article.module.css";
 
 const titleFont = Anton({
   weight: "400",
   subsets: ["latin"],
 });
-
-type Author = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  image: string;
-};
-
-type Post = {
-  id: string;
-  createdAt: string;
-  image: string;
-  author: Author;
-  title: string;
-  description: string;
-  body: string;
-  tags: string[];
-};
 
 export default function BlogArticle({
   title,
@@ -61,18 +44,18 @@ export default function BlogArticle({
       "violet",
       "yellow",
     ];
-    
+
     // Use a simple hash function to consistently map a tag to a color
     const hashCode = (str: string) => {
       let hash = 0;
       for (let i = 0; i < str.length; i++) {
         const char = str.charCodeAt(i);
-        hash = ((hash << 5) - hash) + char;
+        hash = (hash << 5) - hash + char;
         hash = hash & hash; // Convert to 32-bit integer
       }
       return Math.abs(hash);
     };
-  
+
     const colorIndex = hashCode(tag) % colors.length;
     return colors[colorIndex];
   };
@@ -117,7 +100,7 @@ export default function BlogArticle({
         <Divider my="lg" />
 
         {/* Display the current JSON content of the editor */}
-        <TiptapRenderer content={JSON.parse(body)} />
+        {body && <TiptapRenderer content={JSON.parse(body)} />}
 
         <Divider my="lg" />
         <Group>
