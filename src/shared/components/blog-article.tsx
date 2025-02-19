@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import { Anton } from "next/font/google";
 
-import TiptapRenderer from "@/shared/components/content-renderer";
+import TiptapRenderer from "@shared/components/content-renderer";
 import classes from "@styles/article/styles.module.css";
 
 const titleFont = Anton({
