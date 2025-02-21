@@ -21,11 +21,23 @@
 .backgroundCircleTopRight {
   top: -200px;
   right: -200px;
+  animation: slowPulse 15s ease-out 0s infinite alternate both;
 }
 
 .backgroundCircleBottomLeft {
-  bottom: -200px;
+  bottom: -100px;
   left: -200px;
+  animation: slowPulse 15s ease-out 0s infinite alternate both;
+}
+
+@keyframes slowPulse {
+	0% {
+		transform: scale(0.5);
+	}
+
+	100% {
+		transform: scale(1);
+	}
 }
 
 .inner {
