@@ -1,6 +1,31 @@
-.wrapper {
+.container {
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
   position: relative;
   box-sizing: border-box;
+}
+
+.backgroundCircle {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  box-shadow: var(--mantine-color-pink-5) 0px 48px 100px 0px;
+  filter: blur(100px);
+  z-index: -1;
+}
+
+.backgroundCircleTopRight {
+  top: -200px;
+  right: -200px;
+}
+
+.backgroundCircleBottomLeft {
+  bottom: -200px;
+  left: -200px;
 }
 
 .inner {

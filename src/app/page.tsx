@@ -21,16 +21,19 @@ export default function Home() {
   }, [])
 
   return (
-    <>
+    <div className={classes.container}>
       <title>Blog UI</title>
 
-      <div className={classes.wrapper}>
+      <div className={`${classes.backgroundCircle} ${classes.backgroundCircleTopRight}`}></div>
+      <div className={`${classes.backgroundCircle} ${classes.backgroundCircleBottomLeft}`}></div>
+
+      <div className={classes.header}>
         <Container size={700} className={classes.inner}>
           <h1 className={classes.title}>
             <Text
               component="span"
               variant="gradient"
-              gradient={{ from: "blue", to: "cyan" }}
+              gradient={{ from: "pink", to: "purple", deg: 90 }}
               inherit
             >
               Blog
@@ -56,6 +59,6 @@ export default function Home() {
           <Text c="dimmed">© 2021 Blog UI. All rights reserved</Text>
         </Container>
       </footer>
-    </>
+    </div>
   );
 }
