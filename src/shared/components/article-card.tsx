@@ -20,23 +20,23 @@ export function ArticleCard({ post }: { post: Post }) {
   return (
     <Card withBorder padding="lg" radius="md" className={classes.card}>
       <Card.Section mb="sm">
-        <Image src={post.image} alt={post.title} height={180} />
+        <Image src={post.image} alt={post.title} height={250} />
       </Card.Section>
 
       <Group className={classes.tagsGroup}>
-        {post.tags.map((tag) => (
+        {post.tags.length && (
           <Badge
-            key={tag}
+            key={post.tags[0]}
             w="fit-content"
             variant="light"
             className={classes.tag}
           >
-            {tag}
+            {post.tags[0]}
           </Badge>
-        ))}
+        )}
       </Group>
 
-      <Anchor href={`/post/${post.id}`}>
+      <Anchor href={`/post/${post.id}`} className={classes.link}>
         <Text
           className={classes.title}
           mt="xs"
@@ -53,17 +53,19 @@ export function ArticleCard({ post }: { post: Post }) {
         </Text>
       </Card.Section>
 
-      <Group mt="md">
-        <Avatar src={post.author.image} radius="sm" />
-        <div>
-          <Text fw={500}>
-            {post.author.firstName} {post.author.lastName}
-          </Text>
-          <Text fz="xs" c="dimmed">
-            posted 34 minutes ago
-          </Text>
-        </div>
-      </Group>
+      <div className={classes.author}>
+        <Group>
+          <Avatar src={post.author.image} radius="sm" />
+          <div>
+            <Text fw={500}>
+              {post.author.firstName} {post.author.lastName}
+            </Text>
+            <Text fz="xs" c="dimmed">
+              posted 34 minutes ago
+            </Text>
+          </div>
+        </Group>
+      </div>
 
       <Card.Section className={classes.footer}>
         <Group justify="space-between">

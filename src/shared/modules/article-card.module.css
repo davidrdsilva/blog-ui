@@ -1,6 +1,14 @@
 .card {
   background-color: var(--mantine-color-body);
   width: 30%;
+  height: 600px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 4px 12px;
+  transition: box-shadow 0.3s ease;
 }
 
 .title {
@@ -11,19 +19,29 @@
 
 .description {
   padding: var(--mantine-spacing-xs) var(--mantine-spacing-lg);
-  border-bottom: 1px solid
-    light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
 }
 
 .footer {
   padding: var(--mantine-spacing-xs) var(--mantine-spacing-lg);
   margin-top: var(--mantine-spacing-md);
-  border-top: 1px solid
-    light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
 }
 
 .tagsGroup {
   width: 20em;
+}
+
+.author {
+  border: 1px solid
+    light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5));
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.link:hover {
+  text-decoration: none;
 }
 
 @media screen and (max-width: 768px) {
@@ -32,5 +50,6 @@
   }
   .card {
     width: 100%;
+    height: auto;
   }
 }

@@ -50,6 +50,12 @@ export default function Home() {
           ))}
         </Group>
       </Container>
+
+      <footer>
+        <Container size="lg" ta="center" my="xl">
+          <Text c="dimmed">© 2021 Blog UI. All rights reserved</Text>
+        </Container>
+      </footer>
     </>
   );
 }
