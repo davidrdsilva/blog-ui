@@ -56,7 +56,7 @@ export default function Home() {
 
       <footer>
         <Container size="lg" ta="center" my="xl">
-          <Text c="dimmed">© 2021 Blog UI. All rights reserved</Text>
+          <Text c="dimmed">© {new Date().getFullYear()} Blog UI. All rights reserved</Text>
         </Container>
       </footer>
     </div>
