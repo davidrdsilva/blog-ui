@@ -11,7 +11,7 @@ import {
 } from "@mantine/core";
 import { IconHeart } from "@tabler/icons-react";
 
-import classes from "@shared/modules/article-card.module.css";
+import classes from "@styles/article-card/article-card.module.css";
 import { Post } from "@shared/types/post.type";
 
 export function ArticleCard({ post }: { post: Post }) {

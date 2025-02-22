@@ -3,7 +3,7 @@
 import { ArticleCard } from "@shared/components/article-card";
 import { Container, Group, Text } from "@mantine/core";
 
-import classes from "@shared/modules/homepage.module.css";
+import classes from "@styles/homepage/homepage.module.css";
 import { useEffect, useState } from "react";
 import { postsMock } from "../../mocks/mock-data";
 import { Post } from "@shared/types/post.type";

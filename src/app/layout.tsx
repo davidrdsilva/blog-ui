@@ -7,6 +7,7 @@ import "./globals.css";
 
 // Mantine core styles
 import "@mantine/core/styles.css";
+import { Header } from "@/shared/components/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <MantineProvider theme={theme} defaultColorScheme="dark">
+          <Header />
           {children}
         </MantineProvider>
       </body>
