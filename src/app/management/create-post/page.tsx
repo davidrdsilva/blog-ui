@@ -17,69 +17,22 @@ import StarterKit from "@tiptap/starter-kit";
 import { useState } from "react";
 
 // Import styles
-import TiptapRenderer from "@shared/components/content-renderer";
 import "@mantine/tiptap/styles.css";
+import TiptapRenderer from "@shared/components/content-renderer";
 import classes from "@styles/create-post/styles.module.css";
 
 // Mock
+import { Post } from "@shared/types/post.type";
 import { postMock } from "../../../../mocks/mock-data";
 
 const xIcon = <IconX size={20} />;
 const checkIcon = <IconCheck size={20} />;
 
-const initialContent: JSONContent = {
-  type: "doc",
-  content: [
-    {
-      type: "heading",
-      attrs: { level: 2 },
-      content: [{ type: "text", text: "Welcome to Mantine rich text editor" }],
-    },
-    {
-      type: "paragraph",
-      content: [
-        {
-          type: "text",
-          text: "RichTextEditor component focuses on usability and is designed to be as simple as possible to bring a familiar editing experience to regular users. ",
-        },
-        { type: "text", marks: [{ type: "code" }], text: "RichTextEditor" },
-        { type: "text", text: " is based on " },
-        {
-          type: "text",
-          marks: [
-            {
-              type: "link",
-              attrs: {
-                href: "https://tiptap.dev/",
-                target: "_blank",
-                rel: "noopener noreferrer",
-              },
-            },
-          ],
-          text: "Tiptap.dev",
-        },
-        { type: "text", text: " and supports all of its features:" },
-      ],
-    },
-  ],
-};
-
-type Author = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  image: string;
-};
-
-type Post = {
-  id: string;
-  createdAt: string;
-  image: string;
-  author: Author;
-  title: string;
-  body: string;
-  tags: string[];
-};
+interface NotificationState {
+  show: boolean;
+  type: "success" | "error";
+  message: string;
+}
 
 export default function TextEditor() {
   // State for all form fields
@@ -88,32 +41,79 @@ export default function TextEditor() {
   const [tags, setTags] = useState<string[]>([]);
   const [image, setImage] = useState<File | null>(null);
   const [isDraft, setIsDraft] = useState(false);
-  const [editorContent, setEditorContent] = useState(initialContent);
+  const [editorContent, setEditorContent] = useState<JSONContent>({});
   const [loading, setLoading] = useState(false);
 
-  const savePost = () => {
+  // Notification state
+  const [notification, setNotification] = useState<NotificationState>({
+    show: false,
+    type: "success",
+    message: "",
+  });
+
+  const hideNotification = () => {
+    setNotification((prev) => ({ ...prev, show: false }));
+  };
+
+  const showNotification = (type: "success" | "error", message: string) => {
+    setNotification({
+      show: true,
+      type,
+      message: message,
+    });
+
+    // Auto-hide notification after 5 seconds
+    setTimeout(hideNotification, 5000);
+  };
+
+  const savePost = async () => {
     setLoading(true);
+    try {
+      // Create a new Post object with current values
+      const newPost: Post = {
+        id: crypto.randomUUID(),
+        createdAt: new Date().toISOString(),
+        image: image ? URL.createObjectURL(image) : "",
+        author: postMock.author,
+        title,
+        body: JSON.stringify(editorContent),
+        tags,
+        description,
+      };
 
-    // Create a new Post object with current values
-    const newPost: Post = {
-      id: crypto.randomUUID(), // Generate a random ID
-      createdAt: new Date().toISOString(),
-      image: image ? URL.createObjectURL(image) : "", // Create URL for uploaded image
-      author: postMock.author, // Using mock author data
-      title: title,
-      body: JSON.stringify(editorContent),
-      tags: tags,
-    };
+      // Simulate API call
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (
+            title &&
+            description &&
+            image &&
+            editorContent.content &&
+            editorContent.content.length > 1
+          ) {
+            resolve(newPost);
+          } else {
+            reject(new Error("Title, description and image are required"));
+          }
+        }, 1000);
+      });
 
-    // Here you can handle the post data (e.g., send to API)
-    console.log("Saving post:", newPost);
-
-    setLoading(false);
+      showNotification("success", "Post saved successfully");
+    } catch (error) {
+      showNotification(
+        "error",
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Try again"
+      );
+      console.error("Error saving post:", typeof error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const editor = useEditor({
     extensions: [StarterKit, Link],
-    content: initialContent,
     immediatelyRender: false,
     onUpdate: ({ editor }) => {
       // Update the state with the editor's current JSON content
@@ -227,25 +227,30 @@ export default function TextEditor() {
         Save
       </Button>
 
-      <Notification
-        icon={xIcon}
-        mt="md"
-        color="red"
-        title="Bummer!"
-        withCloseButton={false}
-      >
-        Something went wrong
-      </Notification>
+      {/* Conditional rendering of notifications */}
+      {notification.show && notification.type === "error" && (
+        <Notification
+          icon={<IconX size={20} />}
+          mt="md"
+          color="red"
+          title="Error"
+          onClose={hideNotification}
+        >
+          {notification.message}
+        </Notification>
+      )}
 
-      <Notification
-        icon={checkIcon}
-        color="teal"
-        title="All good!"
-        mt="md"
-        withCloseButton={false}
-      >
-        Everything is fine
-      </Notification>
+      {notification.show && notification.type === "success" && (
+        <Notification
+          icon={<IconCheck size={20} />}
+          color="teal"
+          title="Success"
+          mt="md"
+          onClose={hideNotification}
+        >
+          {notification.message}
+        </Notification>
+      )}
 
       {/* Display the current JSON content of the editor */}
       <div style={{ marginTop: 20 }}>
