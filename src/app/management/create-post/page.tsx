@@ -25,9 +25,6 @@ import classes from "@styles/create-post/styles.module.css";
 import { Post } from "@shared/types/post.type";
 import { postMock } from "../../../../mocks/mock-data";
 
-const xIcon = <IconX size={20} />;
-const checkIcon = <IconCheck size={20} />;
-
 interface NotificationState {
   show: boolean;
   type: "success" | "error";
@@ -106,7 +103,7 @@ export default function TextEditor() {
           ? error.message
           : "Something went wrong. Try again"
       );
-      console.error("Error saving post:", typeof error);
+      console.error("Error saving post:", error);
     } finally {
       setLoading(false);
     }
