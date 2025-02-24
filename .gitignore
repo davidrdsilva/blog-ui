@@ -23,7 +23,8 @@
 # misc
 .DS_Store
 *.pem
-/mocks
+/mocks/*
+!mocks/data.ts
 
 # debug
 npm-debug.log*

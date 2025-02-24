@@ -5,7 +5,7 @@ import { Container, Group, Text } from '@mantine/core';
 
 import classes from '@styles/homepage/homepage.module.css';
 import { useEffect, useState } from 'react';
-import { postsMock } from '../../mocks/mock-data';
+import { postsMock } from '../../mocks/data';
 import { Post } from '@shared/types/post.type';
 
 export default function Home() {
