@@ -7,8 +7,8 @@ WORKDIR /app
 # Install dependencies
 COPY package.json package-lock.json ./
 
-RUN npm pkg delete scripts.prepare \
-    && npm ci
+RUN npm pkg delete scripts.prepare && \
+    npm ci
 
 # Copy the rest of the application code
 COPY . .
@@ -32,9 +32,9 @@ WORKDIR /app
 COPY --from=builder /app ./
 
 # Install only production dependencies and change ownership of the app directory
-RUN npm pkg delete scripts.prepare \
-    && npm ci --omit=dev \
-    && chown -R appuser:appgroup /app
+RUN npm pkg delete scripts.prepare && \
+    npm ci --omit=dev && \
+    chown -R appuser:appgroup /app
 
 # Switch to the non-root user
 USER appuser
