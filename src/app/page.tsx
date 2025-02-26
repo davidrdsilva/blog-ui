@@ -1,23 +1,37 @@
 'use client';
 
+import { Container, Group, Loader, Text } from '@mantine/core';
 import { ArticleCard } from '@shared/components/article-card';
-import { Container, Group, Text } from '@mantine/core';
 
+import { Post } from '@shared/types/post.type';
 import classes from '@styles/homepage/homepage.module.css';
 import { useEffect, useState } from 'react';
-import { postsMock } from '../../mocks/data';
-import { Post } from '@shared/types/post.type';
 
 export default function Home() {
     const [posts, setPosts] = useState<Post[]>([]);
-
-    const getPosts = () => {
-        const data = postsMock;
-        setPosts(data);
-    };
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getPosts();
+        async function fetchBlogPosts() {
+            setLoading(true);
+            try {
+                const response = await fetch('/api/posts');
+
+                if (!response.ok) {
+                    throw new Error(`Error fetching blog posts: ${response.status}`);
+                }
+
+                const data = await response.json();
+                setPosts(data.posts);
+            } catch (err) {
+                console.error('Failed to fetch blog posts:', err);
+                // setError('Failed to load blog posts. Please try again later.');
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchBlogPosts();
     }, []);
 
     return (
@@ -48,6 +62,7 @@ export default function Home() {
 
             <Container size="lg" mb="xl">
                 <Group justify="center" gap="xs">
+                    {loading && <Loader color="grape" h={100} />}
                     {posts.length && posts.map((post) => <ArticleCard key={post.id} post={post} />)}
                 </Group>
             </Container>
