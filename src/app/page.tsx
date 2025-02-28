@@ -1,15 +1,15 @@
 'use client';
 
-import { Container, Group, Loader, Text } from '@mantine/core';
+import { Container, Group, Text } from '@mantine/core';
 import { ArticleCard } from '@shared/components/article-card';
 
 import { Post } from '@shared/types/post.type';
 import classes from '@styles/homepage/homepage.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { postsMock } from '../../mocks/data';
 
 export default function Home() {
-    const [posts, setPosts] = useState<Post[]>(postsMock);
+    const [posts] = useState<Post[]>(postsMock);
     // const [loading, setLoading] = useState(true);
 
     // useEffect(() => {
