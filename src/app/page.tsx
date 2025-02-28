@@ -6,33 +6,34 @@ import { ArticleCard } from '@shared/components/article-card';
 import { Post } from '@shared/types/post.type';
 import classes from '@styles/homepage/homepage.module.css';
 import { useEffect, useState } from 'react';
+import { postsMock } from '../../mocks/data';
 
 export default function Home() {
-    const [posts, setPosts] = useState<Post[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [posts, setPosts] = useState<Post[]>(postsMock);
+    // const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        async function fetchBlogPosts() {
-            setLoading(true);
-            try {
-                const response = await fetch('/api/posts');
+    // useEffect(() => {
+    //     async function fetchBlogPosts() {
+    //         setLoading(true);
+    //         try {
+    //             const response = await fetch('/api/posts');
 
-                if (!response.ok) {
-                    throw new Error(`Error fetching blog posts: ${response.status}`);
-                }
+    //             if (!response.ok) {
+    //                 throw new Error(`Error fetching blog posts: ${response.status}`);
+    //             }
 
-                const data = await response.json();
-                setPosts(data.posts);
-            } catch (err) {
-                console.error('Failed to fetch blog posts:', err);
-                // setError('Failed to load blog posts. Please try again later.');
-            } finally {
-                setLoading(false);
-            }
-        }
+    //             const data = await response.json();
+    //             setPosts(data.posts);
+    //         } catch (err) {
+    //             console.error('Failed to fetch blog posts:', err);
+    //             // setError('Failed to load blog posts. Please try again later.');
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     }
 
-        fetchBlogPosts();
-    }, []);
+    //     fetchBlogPosts();
+    // }, []);
 
     return (
         <div className={classes.container}>
@@ -62,7 +63,7 @@ export default function Home() {
 
             <Container size="lg" mb="xl">
                 <Group justify="center" gap="xs">
-                    {loading && <Loader color="grape" h={100} />}
+                    {/* {loading && <Loader color="grape" h={100} />} */}
                     {posts.length && posts.map((post) => <ArticleCard key={post.id} post={post} />)}
                 </Group>
             </Container>
