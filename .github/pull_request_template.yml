@@ -1,0 +1,108 @@
+name: Pull Request
+description: Submit a change to the codebase
+title: '[TYPE]: Brief description'
+labels: ['needs-review']
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Thanks for taking the time to fill out this pull request!
+
+    - type: input
+      id: related-issue
+      attributes:
+          label: Related Issue
+          description: Link to the issue this PR addresses
+          placeholder: '#123'
+      validations:
+          required: false
+
+    - type: dropdown
+      id: pr-type
+      attributes:
+          label: PR Type
+          description: What kind of change does this PR introduce?
+          options:
+              - feature (new functionality)
+              - fix (bug fix)
+              - docs (documentation only)
+              - style (formatting, missing semicolons, etc; no code change)
+              - refactor (refactoring production code)
+              - test (adding missing tests, refactoring tests)
+              - chore (updating grunt tasks etc; no production code change)
+              - performance (performance improvement)
+              - revert (reverting previous commit)
+              - dependencies (upgrading or downgrading dependencies)
+              - ci (CI/CD related changes)
+      validations:
+          required: true
+
+    - type: textarea
+      id: what-changed
+      attributes:
+          label: What Changed?
+          description: Describe the changes you've made in detail
+          placeholder: 'I added a new feature that...'
+      validations:
+          required: true
+
+    - type: textarea
+      id: why-changed
+      attributes:
+          label: Why was this change needed?
+          description: Explain the motivation behind these changes
+          placeholder: 'This change was needed because...'
+      validations:
+          required: true
+
+    - type: textarea
+      id: how-tested
+      attributes:
+          label: How Has This Been Tested?
+          description: Describe the tests you ran to verify your changes
+          placeholder: |
+              - [ ] Unit tests
+              - [ ] Integration tests
+              - [ ] Manual testing
+      validations:
+          required: true
+
+    - type: textarea
+      id: screenshots
+      attributes:
+          label: Screenshots
+          description: If applicable, add screenshots to help explain your changes
+      validations:
+          required: false
+
+    - type: textarea
+      id: notes
+      attributes:
+          label: Additional Notes
+          description: Add any other context about the pull request here
+          placeholder: 'For example: documentation updates, deployment considerations, etc.'
+      validations:
+          required: false
+
+    - type: checkboxes
+      id: checklist
+      attributes:
+          label: PR Checklist
+          description: Before submitting, please confirm the following items
+          options:
+              - label: My code follows the style guidelines of this project
+                required: true
+              - label: I have performed a self-review of my own code
+                required: true
+              - label: I have commented my code, particularly in hard-to-understand areas
+                required: true
+              - label: I have made corresponding changes to the documentation
+                required: true
+              - label: My changes generate no new warnings or errors
+                required: true
+              - label: I have added tests that prove my fix is effective or that my feature works
+                required: true
+              - label: New and existing unit tests pass locally with my changes
+                required: true
+              - label: Any dependent changes have been merged and published
+                required: false

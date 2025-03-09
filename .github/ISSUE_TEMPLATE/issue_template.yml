@@ -1,0 +1,236 @@
+name: Bug Report
+description: File a bug report
+title: '[BUG]: '
+labels: ['bug', 'triage']
+assignees:
+    - octocat
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Thanks for taking the time to fill out this bug report!
+
+    - type: input
+      id: contact
+      attributes:
+          label: Contact Details
+          description: How can we get in touch with you if we need more info?
+          placeholder: ex. email@example.com
+      validations:
+          required: false
+
+    - type: dropdown
+      id: version
+      attributes:
+          label: Version
+          description: What version of our software are you running?
+          options:
+              - 1.0.0 (Latest)
+              - 0.9.0
+              - 0.8.0
+              - 0.7.0
+              - 0.6.0 or older
+      validations:
+          required: true
+
+    - type: dropdown
+      id: browsers
+      attributes:
+          label: What browsers are you seeing the problem on? (if applicable)
+          multiple: true
+          options:
+              - Firefox
+              - Chrome
+              - Safari
+              - Microsoft Edge
+              - Opera
+      validations:
+          required: false
+
+    - type: dropdown
+      id: os
+      attributes:
+          label: Operating System
+          description: What operating system are you using?
+          options:
+              - Windows
+              - macOS
+              - Linux
+              - iOS
+              - Android
+              - Other
+      validations:
+          required: true
+
+    - type: textarea
+      id: what-happened
+      attributes:
+          label: What happened?
+          description: Also tell us, what did you expect to happen?
+          placeholder: Tell us what you see!
+          value: 'A bug happened!'
+      validations:
+          required: true
+
+    - type: textarea
+      id: reproduction-steps
+      attributes:
+          label: Steps To Reproduce
+          description: Steps to reproduce the behavior
+          placeholder: |
+              1. Go to '...'
+              2. Click on '....'
+              3. Scroll down to '....'
+              4. See error
+      validations:
+          required: true
+
+    - type: textarea
+      id: logs
+      attributes:
+          label: Relevant log output
+          description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+          render: shell
+      validations:
+          required: false
+
+    - type: textarea
+      id: screenshots
+      attributes:
+          label: Screenshots
+          description: If applicable, add screenshots to help explain your problem.
+      validations:
+          required: false
+
+    - type: textarea
+      id: additional-context
+      attributes:
+          label: Additional context
+          description: Add any other context about the problem here.
+      validations:
+          required: false
+
+    - type: checkboxes
+      id: terms
+      attributes:
+          label: Before submitting
+          description: By submitting this issue, you confirm the following
+          options:
+              - label: I have searched existing issues to ensure this is not a duplicate
+                required: true
+              - label: I have provided all the necessary information to understand and reproduce the issue
+                required: true
+              - label: I have updated to the latest version of the software (if possible)
+                required: true
+
+---
+name: Feature Request
+description: Suggest an idea for this project
+title: '[FEATURE]: '
+labels: ['enhancement']
+assignees:
+    - octocat
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Thanks for taking the time to suggest a new feature!
+
+    - type: textarea
+      id: problem
+      attributes:
+          label: Is your feature request related to a problem?
+          description: A clear and concise description of what the problem is.
+          placeholder: I'm always frustrated when [...]
+      validations:
+          required: true
+
+    - type: textarea
+      id: solution
+      attributes:
+          label: Describe the solution you'd like
+          description: A clear and concise description of what you want to happen.
+      validations:
+          required: true
+
+    - type: textarea
+      id: alternatives
+      attributes:
+          label: Describe alternatives you've considered
+          description: A clear and concise description of any alternative solutions or features you've considered.
+      validations:
+          required: false
+
+    - type: textarea
+      id: context
+      attributes:
+          label: Additional context
+          description: Add any other context, screenshots, or mockups about the feature request here.
+      validations:
+          required: false
+
+    - type: checkboxes
+      id: terms
+      attributes:
+          label: Before submitting
+          description: By submitting this feature request, you confirm the following
+          options:
+              - label: I have searched existing issues to ensure this is not a duplicate
+                required: true
+              - label: I have provided clear details about the proposed feature and its value
+                required: true
+
+---
+name: Documentation Issue
+description: Report issues with documentation
+title: '[DOCS]: '
+labels: ['documentation']
+assignees:
+    - octocat
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Thanks for helping us improve our documentation!
+
+    - type: input
+      id: page-link
+      attributes:
+          label: Documentation Page Link
+          description: Link to the documentation page with the issue
+          placeholder: https://docs.example.com/page
+      validations:
+          required: true
+
+    - type: dropdown
+      id: issue-type
+      attributes:
+          label: Type of Documentation Issue
+          description: What type of documentation issue is this?
+          options:
+              - Incorrect information
+              - Missing information
+              - Unclear explanation
+              - Outdated content
+              - Formatting/display issue
+              - Broken link
+              - Other
+      validations:
+          required: true
+
+    - type: textarea
+      id: description
+      attributes:
+          label: Issue Description
+          description: Describe what's wrong with the documentation
+          placeholder: The explanation in the Usage section is unclear because...
+      validations:
+          required: true
+
+    - type: textarea
+      id: suggestion
+      attributes:
+          label: Suggested Improvement
+          description: If possible, suggest how to fix or improve the documentation
+      validations:
+          required: false
