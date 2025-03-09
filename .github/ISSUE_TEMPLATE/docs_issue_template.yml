@@ -1,0 +1,53 @@
+name: Documentation Issue
+description: Report issues with documentation
+title: '[DOCS]: '
+labels: ['documentation']
+assignees:
+    - octocat
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Thanks for helping us improve our documentation!
+
+    - type: input
+      id: page-link
+      attributes:
+          label: Documentation Page Link
+          description: Link to the documentation page with the issue
+          placeholder: https://docs.example.com/page
+      validations:
+          required: true
+
+    - type: dropdown
+      id: issue-type
+      attributes:
+          label: Type of Documentation Issue
+          description: What type of documentation issue is this?
+          options:
+              - Incorrect information
+              - Missing information
+              - Unclear explanation
+              - Outdated content
+              - Formatting/display issue
+              - Broken link
+              - Other
+      validations:
+          required: true
+
+    - type: textarea
+      id: description
+      attributes:
+          label: Issue Description
+          description: Describe what's wrong with the documentation
+          placeholder: The explanation in the Usage section is unclear because...
+      validations:
+          required: true
+
+    - type: textarea
+      id: suggestion
+      attributes:
+          label: Suggested Improvement
+          description: If possible, suggest how to fix or improve the documentation
+      validations:
+          required: false
