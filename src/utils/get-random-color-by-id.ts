@@ -1,6 +1,12 @@
 import { DefaultMantineColor } from '@mantine/core';
 
-export default function getRandomColor(id: string) {
+/**
+ * Given an ID, returns a random Mantine color.
+ * The color is consistent for the same ID.
+ * @param id The ID to generate a color for
+ * @returns A random `DefaultMantineColor` color
+ */
+export default function getRandomMantineColor(id: string) {
     const colors: DefaultMantineColor[] = [
         'red',
         'blue',

@@ -4,7 +4,7 @@ import { Anton } from 'next/font/google';
 
 import TiptapRenderer from '@shared/components/content-renderer';
 import classes from '@styles/article/styles.module.css';
-import getRandomColor from '@utils/get-random-color-by-id';
+import getRandomMantineColor from '@utils/get-random-color-by-id';
 
 const titleFont = Anton({
     weight: '400',
@@ -50,7 +50,7 @@ export default function BlogArticle({ title, description, image, createdAt, body
                 <Divider my="lg" />
                 <Group>
                     {tags.map((tag) => (
-                        <Badge key={tag} color={getRandomColor(tag)} variant="light">
+                        <Badge key={tag} color={getRandomMantineColor(tag)} variant="light">
                             {tag}
                         </Badge>
                     ))}
