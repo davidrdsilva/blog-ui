@@ -2,11 +2,17 @@
 
 import { Container, Group, Text } from '@mantine/core';
 import { ArticleCard } from '@shared/components/article-card';
+import { Anton } from 'next/font/google';
 
 import { Post } from '@shared/types/post.type';
 import classes from '@styles/homepage/homepage.module.css';
 import { useState } from 'react';
 import { postsMock } from '../../mocks/data';
+
+const titleFont = Anton({
+    weight: '400',
+    subsets: ['latin'],
+});
 
 export default function Home() {
     const [posts] = useState<Post[]>(postsMock);
@@ -44,7 +50,7 @@ export default function Home() {
 
             <div className={classes.header}>
                 <Container size={700} className={classes.inner}>
-                    <h1 className={classes.title}>
+                    <h1 className={`${classes.title} ${titleFont.className}`}>
                         <Text
                             component="span"
                             variant="gradient"
