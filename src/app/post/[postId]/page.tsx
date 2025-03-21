@@ -28,7 +28,7 @@ export default function BlogPage() {
         }
 
         fetchBlogPosts();
-    }, []);
+    }, [postId]);
 
     return (
         <BlogArticle

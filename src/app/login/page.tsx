@@ -79,7 +79,7 @@ export default function LoginPage() {
                     </Text>
                 </Title>
                 <Text c="dimmed" size="sm" ta="center" mt={5}>
-                    Don't have an account yet?{' '}
+                    Don&apos;t have an account yet?{' '}
                     <Anchor size="sm" component="button" onClick={() => router.push('/signup')}>
                         Create account
                     </Anchor>
