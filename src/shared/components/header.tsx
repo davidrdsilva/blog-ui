@@ -1,10 +1,11 @@
 'use client';
 
-import { Avatar, Burger, Container, Group, Popover, Stack } from '@mantine/core';
+import { Avatar, Burger, Container, Group, Popover, Stack, Tooltip } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { ColorThemeSwitch } from '@shared/components/color-theme-switch';
 import classes from '@styles/header/header.module.css';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { IconUser, IconBook } from '@tabler/icons-react';
 
 const links = [
     { link: '/', label: 'Homepage' },
@@ -14,6 +15,7 @@ const links = [
 
 export function Header() {
     const pathname = usePathname();
+    const router = useRouter();
     const [opened, { toggle }] = useDisclosure(false);
 
     const items = links.map((link) => (
@@ -25,12 +27,24 @@ export function Header() {
     return (
         <header className={classes.header}>
             <Container size="md" className={classes.inner}>
-                <Avatar src={null} alt="no image here" color="pink" />
+                <IconBook size={24} stroke={1.5} color="var(--mantine-color-pink-6)" />
                 <Group gap={5} visibleFrom="xs">
                     {items}
                 </Group>
 
-                <ColorThemeSwitch />
+                <Group gap="md">
+                    <ColorThemeSwitch />
+                    <Tooltip label="Login">
+                        <Avatar
+                            className={classes.userAvatar}
+                            onClick={() => router.push('/login')}
+                            radius="xl"
+                            size="sm"
+                        >
+                            <IconUser size={18} stroke={1.5} />
+                        </Avatar>
+                    </Tooltip>
+                </Group>
 
                 <Popover
                     width={300}

@@ -1,0 +1,95 @@
+.wrapper {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.backgroundCircle {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    box-shadow: var(--mantine-color-pink-5) 0px 48px 100px 0px;
+    filter: blur(100px);
+    z-index: -1;
+}
+
+.backgroundCircleTopRight {
+    top: -200px;
+    right: -200px;
+    animation: slowPulse 15s ease-out 0s infinite alternate both;
+}
+
+.backgroundCircleBottomLeft {
+    bottom: -100px;
+    left: -200px;
+    animation: slowPulse 15s ease-out 0s infinite alternate both;
+}
+
+@keyframes slowPulse {
+    0% {
+        transform: scale(0.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.title {
+    font-size: 3rem;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+
+    @media (max-width: 768px) {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+}
+
+.formContainer {
+    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+    backdrop-filter: blur(10px);
+    border: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.button {
+    background-image: linear-gradient(90deg, var(--mantine-color-pink-5), var(--mantine-color-purple-5));
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+
+    &:hover {
+        background-image: linear-gradient(90deg, var(--mantine-color-pink-6), var(--mantine-color-purple-6));
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.socialButton {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
