@@ -1,6 +1,6 @@
 'use client';
 
-import { Avatar, Burger, Container, Group, Popover, Stack, Tooltip } from '@mantine/core';
+import { Avatar, Button, Burger, Container, Drawer, Group, Stack, Tooltip, Text, Divider } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { ColorThemeSwitch } from '@shared/components/color-theme-switch';
 import classes from '@styles/header/header.module.css';
@@ -32,7 +32,7 @@ export function Header() {
                     {items}
                 </Group>
 
-                <Group gap="md">
+                <Group gap="md" visibleFrom="xs">
                     <ColorThemeSwitch />
                     <Tooltip label="Login">
                         <Avatar
@@ -46,21 +46,46 @@ export function Header() {
                     </Tooltip>
                 </Group>
 
-                <Popover
-                    width={300}
-                    shadow="md"
-                    withArrow
-                    withOverlay
-                    overlayProps={{ zIndex: 10000, blur: '8px' }}
+                <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
+
+                <Drawer
+                    opened={opened}
+                    onClose={toggle}
+                    title="Navigation"
+                    padding="xl"
+                    size="xs"
+                    position="right"
                     zIndex={10001}
+                    overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
+                    className={classes.drawer}
                 >
-                    <Popover.Target>
-                        <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
-                    </Popover.Target>
-                    <Popover.Dropdown>
-                        <Stack hiddenFrom="xs">{items}</Stack>
-                    </Popover.Dropdown>
-                </Popover>
+                    <Stack gap="md" className={classes.drawerContent}>
+                        <Stack gap="xs" mt="md">
+                            {items}
+                        </Stack>
+
+                        <Divider my="sm" />
+
+                        <Group justify="space-between" align="center">
+                            <Text size="sm">Theme</Text>
+                            <ColorThemeSwitch />
+                        </Group>
+
+                        <Button
+                            fullWidth
+                            leftSection={<IconUser size={18} />}
+                            variant="gradient"
+                            gradient={{ from: 'pink', to: 'purple' }}
+                            onClick={() => {
+                                router.push('/login');
+                                toggle();
+                            }}
+                            className={classes.loginButton}
+                        >
+                            Sign in to your account
+                        </Button>
+                    </Stack>
+                </Drawer>
             </Container>
         </header>
     );
